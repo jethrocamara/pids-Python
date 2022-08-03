@@ -181,7 +181,37 @@ def vigenere_cipher(message, key):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+
+    # Express the parameters' case types.
+
+    str(message)
+    str(key)
+
+    # Ignore the spaces in the message parameter.
+
+    message_n = message.split()
+    j_message_n = ''.join(message_n)
+
+    # Create tuples of the unicode numbers of the variables message (with spaces ignored) and key.
+
+    message_t = tuple(ord(i) for i in j_message_n)
+    key_t = tuple(ord(i) for i in key)
+
+    # Create a tuple of uppercase English letters.
+
+    alphabet = tuple(map(chr, range(ord("A"), ord("Z") + 1)))
+
+    # Add the values of the elements of the inputs' tuples.
+
+    message_key = tuple((sum(i) - 2 * ord("A")) % (len(alphabet)) for i in zip(message_t, key_t * len(message_t[0:len(message_t):len(key_t)])))
+
+    # Map the values of message_key into their respective alphabet values.
+
+    encrypted = list(alphabet[i] for i in message_key)
+ 
+    # Write the statement specifying the function for vigenere_cipher.
+   
+    return ''.join(encrypted)
 
 def scytale_cipher(message, shift):
     '''Scytale Cipher.
@@ -235,7 +265,42 @@ def scytale_cipher(message, shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    
+    # Express the parameters' case types.
+
+    str(message)
+    int(shift)
+   
+    # Create lists of the characters of the message, as well in cases where additional underscores are needed.
+
+    message_l = list(message)
+    message_l_u = list(message) + list("_" for i in range(shift - (len(message) % shift)))
+    
+    # Create a string of message_l_u list
+
+    ''.join(message_l_u)
+
+    # Create lists of the index positions of the aforementioned lists.
+
+    message_i = list(i for i, x in enumerate(message))
+    message_i_u = list(i for i, x in enumerate(message_l_u))
+
+    # Construct the algorithm shifting the messages into their encrypted positions.
+
+    encrypted_i = [(i // shift) + (len(message) // shift) * (i % shift) for i in message_i]
+    encrypted_i_u = [(i // shift) + ((len(message) + (shift - (len(message) % shift))) // shift) * (i % shift) for i in message_i_u]
+    
+    # Create a list of encrypted characters of the message.
+    
+    encrypted = [message_l[i] for i in encrypted_i]
+    encrypted_u = [message_l_u[i] for i in encrypted_i_u]
+
+    # Write the statement specifying the functions for scytale_cipher.
+
+    if len(message) % shift == 0:
+        return ''.join(encrypted)
+    else:
+        return ''.join(encrypted_u)
 
 def scytale_decipher(message, shift):
     '''Scytale De-cipher.
@@ -264,4 +329,28 @@ def scytale_decipher(message, shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    
+    # Express the parameters' case types.
+
+    str(message)
+    int(shift)
+   
+    # Create lists of the characters of the message.
+
+    message_l = list(message)
+
+    # Create lists of the index positions of the message.
+
+    message_i = list(i for i, x in enumerate(message))
+
+    # Construct the algorithm shifting the messages into their decrypted positions.
+
+    decrypted_i = [((i * shift) % len(message)) + (i // (len(message) // shift)) for i in message_i]
+    
+    # Create a list of decrypted characters of the message.
+    
+    decrypted = [message_l[i] for i in decrypted_i]
+
+    # Write the statement specifying the functions for scytale_decipher.
+
+    return ''.join(decrypted)
