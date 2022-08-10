@@ -138,4 +138,5 @@ def eta(first_stop, second_stop, route_map):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    legs = route_map
+    return legs[(first_stop,second_stop)]["travel_time_mins"]
