@@ -95,7 +95,7 @@ def tic_tac_toe(board):
 
     h_condition_o = len(board) in [board[i].count("O") for i,j in enumerate(board)]
     v_condition_o = len(board) in [t_board[i].count("O") for i,j in enumerate(t_board)]
-    d1_condition_o = len(board1) == sum([board[i][i].count("O") for i,j in enumerate(board1)])
+    d1_condition_o = len(board) == sum([board[i][i].count("O") for i,j in enumerate(board)])
     d2_condition_o = len(board) == sum([board[len(board)-1-i][i].count("O") for i,j in enumerate(board)])
 
     # Express the statement specifying the function tic_tac_toe.
