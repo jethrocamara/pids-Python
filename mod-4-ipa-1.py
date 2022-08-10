@@ -41,8 +41,15 @@ def relationship_status(from_member, to_member, social_graph):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
-
+    
+    if to_member in social_graph[from_member]["following"] and from_member in social_graph[to_member]["following"]:
+        return "friends"
+    elif to_member in social_graph[from_member]["following"]:
+        return "follower"
+    elif from_member in social_graph[to_member]["following"]:
+        return "followed by"
+    else:
+        return "no relationship"
 
 def tic_tac_toe(board):
     '''Tic Tac Toe. 
