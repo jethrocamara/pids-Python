@@ -77,7 +77,35 @@ def tic_tac_toe(board):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    
+    # Create a transposed board for counting columns.
+
+    t_board = [i for i in zip(*board)]
+
+    # Write down the conditions for victory.
+
+    # For "X".
+
+    h_condition_x = len(board) in [board[i].count("X") for i,j in enumerate(board)]
+    v_condition_x = len(board) in [t_board[i].count("X") for i,j in enumerate(t_board)]
+    d1_condition_x = len(board) == sum([board[i][i].count("X") for i,j in enumerate(board)])
+    d2_condition_x = len(board) == sum([board[len(board)-1-i][i].count("X") for i,j in enumerate(board)])
+
+    # For "O".
+
+    h_condition_o = len(board) in [board[i].count("O") for i,j in enumerate(board)]
+    v_condition_o = len(board) in [t_board[i].count("O") for i,j in enumerate(t_board)]
+    d1_condition_o = len(board1) == sum([board[i][i].count("O") for i,j in enumerate(board1)])
+    d2_condition_o = len(board) == sum([board[len(board)-1-i][i].count("O") for i,j in enumerate(board)])
+
+    # Express the statement specifying the function tic_tac_toe.
+
+    if h_condition_x or v_condition_x or d1_condition_x or d2_condition_x:
+        return "X"
+    if h_condition_o or v_condition_o or d1_condition_o or d2_condition_o:
+        return "O"
+    else:
+        return "NO WINNER"
 
 def eta(first_stop, second_stop, route_map):
     '''ETA. 
